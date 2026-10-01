@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi mật khẩu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 28px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #252a34;
+            margin-bottom: 8px;
+            font-size: 27px;
+        }
+
+        .description {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 2px solid #e2e5ec;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+            background: #fafbff;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 18px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .note {
+            margin-top: 18px;
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 28px 22px;
+            }
+        }
+
+        .password-policy {
+            margin-top: -8px;
+            margin-bottom: 18px;
+            padding: 14px;
+            background: #f7f8ff;
+            border: 1px solid #e4e7f5;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .password-policy strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .password-policy div {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .password-policy .valid {
+            color: #16803c;
+        }
+
+        .password-policy .invalid {
+            color: #d93025;
+        }
+
+
+        .session-option {
+            margin: 4px 0 18px;
+            padding: 12px 14px;
+            background: #f7f8ff;
+            border: 1px solid #e4e7f5;
+            border-radius: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 0;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            width: auto;
+            margin-top: 2px;
+            accent-color: #667eea;
+        }
+
+        .session-option small {
+            display: block;
+            margin: 6px 0 0 25px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="icon">🔐</div>
+
+        <h2>Đổi mật khẩu</h2>
+        <p class="description">Cập nhật mật khẩu để bảo vệ tài khoản của bạn</p>
+
+        <form>
+            <div class="form-group">
+                <label for="old-password">Mật khẩu hiện tại</label>
+                <input
+                    type="password"
+                    id="old-password"
+                    placeholder="Nhập mật khẩu hiện tại"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="new-password">Mật khẩu mới</label>
+                <input
+                    type="password"
+                    id="new-password"
+                    placeholder="Nhập mật khẩu mới"
+                    required
+                >
+            </div>
+
+            <div class="password-policy">
+                <strong>Chính sách mật khẩu mới:</strong>
+                <div id="rule-length">✗ Ít nhất 8 ký tự</div>
+                <div id="rule-upper">✗ Có ít nhất 1 chữ hoa (A-Z)</div>
+                <div id="rule-lower">✗ Có ít nhất 1 chữ thường (a-z)</div>
+                <div id="rule-number">✗ Có ít nhất 1 chữ số (0-9)</div>
+                <div id="rule-special">✗ Có ít nhất 1 ký tự đặc biệt (!@#$%^&*)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Nhập lại mật khẩu mới"
+                    required
+                >
+            </div>
+
+
+            <div class="session-option">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="revoke-other-sessions" checked>
+                    <span>Thu hồi các phiên đăng nhập khác sau khi đổi mật khẩu</span>
+                </label>
+                <small>Phiên đăng nhập hiện tại vẫn được giữ.</small>
+            </div>
+
+            <button type="submit">Đổi mật khẩu</button>
+        </form>
+
+        <p class="note">Hãy sử dụng mật khẩu đủ mạnh và không chia sẻ cho người khác.</p>
+    </div>
+
+
+    <script>
+        const form = document.querySelector("form");
+        const button = form.querySelector("button");
+        const newPasswordInput = document.getElementById("new-password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+
+        const message = document.createElement("p");
+        message.id = "message";
+        form.appendChild(message);
+
+        // Chính sách mật khẩu:
+        // 1. Tối thiểu 8 ký tự
+        // 2. Ít nhất 1 chữ hoa
+        // 3. Ít nhất 1 chữ thường
+        // 4. Ít nhất 1 chữ số
+        // 5. Ít nhất 1 ký tự đặc biệt
+        function checkPasswordPolicy(password) {
+            const rules = {
+                length: password.length >= 8,
+                upper: /[A-Z]/.test(password),
+                lower: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*]/.test(password)
+            };
+
+            updateRule("rule-length", rules.length);
+            updateRule("rule-upper", rules.upper);
+            updateRule("rule-lower", rules.lower);
+            updateRule("rule-number", rules.number);
+            updateRule("rule-special", rules.special);
+
+            return Object.values(rules).every(Boolean);
+        }
+
+        function updateRule(id, valid) {
+            const element = document.getElementById(id);
+            element.className = valid ? "valid" : "invalid";
+            element.textContent = (valid ? "✓ " : "✗ ") + element.textContent.replace(/^[✓✗] /, "");
+        }
+
+        newPasswordInput.addEventListener("input", () => {
+            checkPasswordPolicy(newPasswordInput.value);
+        });
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const oldPassword = document.getElementById("old-password").value;
+            const newPassword = newPasswordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            const revokeOtherSessions = document.getElementById("revoke-other-sessions").checked;
+
+            message.textContent = "";
+            message.style.color = "";
+
+            // Kiểm tra chính sách trước khi gọi API
+            if (!checkPasswordPolicy(newPassword)) {
+                message.textContent = "Mật khẩu chưa đáp ứng đầy đủ chính sách.";
+                message.style.color = "#d93025";
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                message.textContent = "Mật khẩu mới không khớp.";
+                message.style.color = "#d93025";
+                return;
+            }
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                message.textContent = "Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn.";
+                message.style.color = "#d93025";
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Đang xử lý...";
+
+            try {
+                const response = await fetch("http://localhost:3000/api/auth/change-password", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify({
+                        oldPassword,
+                        newPassword,
+                        confirmPassword,
+                        revokeOtherSessions
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || "Đổi mật khẩu thất bại.");
+                }
+
+                message.textContent = data.message;
+                message.style.color = "#16803c";
+                form.reset();
+                checkPasswordPolicy("");
+
+            } catch (error) {
+                message.textContent = error.message;
+                message.style.color = "#d93025";
+            } finally {
+                button.disabled = false;
+                button.textContent = "Đổi mật khẩu";
+            }
+        });
+
+        checkPasswordPolicy("");
+    </script>
+</body>
+</html>
